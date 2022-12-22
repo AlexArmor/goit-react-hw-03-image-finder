@@ -4,7 +4,23 @@ export class Searchbar extends Component {
   state = {
     searchValue: '',
   };
+
+  inputChange = event => {
+    this.setState({ searchValue: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onFormSubmit(this.state.searchValue);
+    event.target.reset();
+  };
+
   render() {
-    return <input>Searchbar</input>;
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input onChange={this.inputChange} />
+        <button type="submit">{this.props.btnText}</button>
+      </form>
+    );
   }
 }

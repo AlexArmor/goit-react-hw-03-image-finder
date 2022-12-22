@@ -10,12 +10,20 @@ export class App extends Component {
     showBtn: false,
   };
 
-  onFormSubmit = () => {};
+  onFormSubmit = query => {
+    this.setState({
+      query,
+      images: [],
+      largeImageURL: '',
+      page: 1,
+      showBtn: false,
+    });
+  };
 
   render() {
     return (
       <>
-        <Searchbar onFormSubmit={this.onFormSubmit} btnSearch={btnSearch} />
+        <Searchbar onFormSubmit={this.onFormSubmit} btnText="Search" />
         {/* <Loader />
         <ImageGallery />
         <Button />
