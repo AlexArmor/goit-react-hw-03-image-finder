@@ -11,6 +11,8 @@ export class App extends Component {
     showBtn: false,
   };
 
+  componentDidUpdate(_, prevState);
+
   onFormSubmit = query => {
     this.setState({
       query,
