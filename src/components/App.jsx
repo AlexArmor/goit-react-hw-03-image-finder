@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar';
+import { getImages } from '../service/api';
 
 export class App extends Component {
   state = {
