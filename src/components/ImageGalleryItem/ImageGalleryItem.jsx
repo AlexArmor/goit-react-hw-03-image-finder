@@ -1,7 +1,9 @@
-export const ImageGalleryItem = ({ webformatURL, tags }) => {
+import { Image } from './ImageGalleryItem.styled';
+
+export const ImageGalleryItem = ({ previewURL, alt }) => {
   return (
     <li>
-      <img src={webformatURL} alt={tags} />
+      <Image src={previewURL} alt={alt} />
     </li>
   );
 };
