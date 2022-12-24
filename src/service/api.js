@@ -5,7 +5,7 @@ const API_KEY = '31498114-afd850579f929b713e5d5f459';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 axios.defaults.headers.common['Authorization'] = API_KEY;
 axios.defaults.params = {
-  orientation: 'landscape',
+  orientation: 'horizontal',
   per_page: 12,
 };
 
