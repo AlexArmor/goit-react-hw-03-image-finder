@@ -38,9 +38,9 @@ export class App extends Component {
   };
 
   handleClick = () => {
-    this.setState({
-      page: this.setState.page + 1,
-    });
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
 
   render() {
