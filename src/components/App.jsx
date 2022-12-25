@@ -16,6 +16,7 @@ export class App extends Component {
     isLoading: false,
     showBtn: false,
     isEmpty: false,
+    error: null,
   };
 
   componentDidMount() {
@@ -47,9 +48,11 @@ export class App extends Component {
             showBtn: Math.ceil(totalHits / 12) > this.state.page,
           }));
         })
-        .catch(error => {
-          console.log(error);
-        })
+        .catch(error =>
+          this.setState({
+            error: error.message,
+          })
+        )
         .finally(() => {
           this.setState({
             isLoading: false,
