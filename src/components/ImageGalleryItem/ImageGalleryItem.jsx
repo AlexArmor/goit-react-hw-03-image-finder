@@ -1,9 +1,9 @@
-import { Image } from './ImageGalleryItem.styled';
+import { Image, Item } from './ImageGalleryItem.styled';
 
 export const ImageGalleryItem = ({ previewURL, alt }) => {
   return (
-    <li>
+    <Item>
       <Image src={previewURL} alt={alt} />
-    </li>
+    </Item>
   );
 };

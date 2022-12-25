@@ -3,6 +3,8 @@ import { Searchbar } from './Searchbar';
 import { getImages } from '../service/api';
 import { ImageGallery } from './ImageGallery';
 import { Button } from './Button';
+import { Loader } from './Loader';
+import { Modal } from './Modal';
 
 export class App extends Component {
   state = {
@@ -10,6 +12,7 @@ export class App extends Component {
     images: [],
     largeImageURL: '',
     page: 1,
+    isLoading: false,
     showBtn: false,
   };
 
@@ -18,13 +21,25 @@ export class App extends Component {
       prevState.query !== this.state.query ||
       prevState.page !== this.state.page
     ) {
-      getImages(this.state.query, this.state.page).then(({ hits }) => {
-        this.setState(prevState => ({
-          images: [...prevState.images, ...hits],
-        }));
+      this.setState({
+        isLoading: true,
       });
+      getImages(this.state.query, this.state.page)
+        .then(({ hits, totalHits }) => {
+          this.setState(prevState => ({
+            images: [...prevState.images, ...hits],
+            showBtn: Math.ceil(totalHits / 12) > this.state.page,
+          }));
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.setState({
+            isLoading: false,
+          });
+        });
     }
-    console.log(this.state.images);
   }
 
   onFormSubmit = query => {
@@ -33,6 +48,7 @@ export class App extends Component {
       images: [],
       largeImageURL: '',
       page: 1,
+      isLoading: false,
       showBtn: false,
     });
   };
@@ -43,14 +59,24 @@ export class App extends Component {
     }));
   };
 
+  handleImageClick = largeImageURL => {
+    this.setState({
+      largeImageURL,
+    });
+  };
+
   render() {
     return (
       <>
         <Searchbar onFormSubmit={this.onFormSubmit} btnText="Search" />
+        {this.state.isLoading && <Loader />}
         <ImageGallery images={this.state.images} />
-        <Button onLoadMoreClick={this.handleClick} />
-        {/* <Loader />
-        <Modal /> */}
+        {this.state.showBtn && <Button onLoadMoreClick={this.handleClick} />}
+        <Modal
+          largeImageURL={this.state.largeImageURL}
+          onImageClick={this.handleImageClick}
+          alt={this.state.images.tags}
+        />
       </>
     );
   }

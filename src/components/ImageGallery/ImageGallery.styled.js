@@ -4,5 +4,6 @@ export const ImageList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  gap: 10px;
+  gap: 15px;
+  justify-content: center;
 `;
