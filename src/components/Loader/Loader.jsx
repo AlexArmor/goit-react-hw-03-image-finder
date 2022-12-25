@@ -1,5 +1,10 @@
 import { LoadCircle } from './Loader.styled';
+import { Backdrop } from '../Backdrop/Backdrop.styled';
 
 export const Loader = () => {
-  return <LoadCircle></LoadCircle>;
+  return (
+    <Backdrop>
+      <LoadCircle></LoadCircle>
+    </Backdrop>
+  );
 };
