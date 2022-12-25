@@ -5,6 +5,7 @@ import { ImageGallery } from './ImageGallery';
 import { Button } from './Button';
 import { Loader } from './Loader';
 import { Modal } from './Modal';
+import { Attention } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -14,6 +15,7 @@ export class App extends Component {
     page: 1,
     isLoading: false,
     showBtn: false,
+    isEmpty: false,
   };
 
   componentDidMount() {
@@ -34,6 +36,12 @@ export class App extends Component {
       });
       getImages(this.state.query, this.state.page)
         .then(({ hits, totalHits }) => {
+          if (hits.length === 0) {
+            this.setState({
+              isEmpty: true,
+            });
+            return;
+          }
           this.setState(prevState => ({
             images: [...prevState.images, ...hits],
             showBtn: Math.ceil(totalHits / 12) > this.state.page,
@@ -59,6 +67,7 @@ export class App extends Component {
       isLoading: false,
       showBtn: false,
       showModal: false,
+      isEmpty: false,
     });
   };
 
@@ -87,10 +96,14 @@ export class App extends Component {
       <>
         <Searchbar onFormSubmit={this.onFormSubmit} btnText="Search" />
         {this.state.isLoading && <Loader />}
-        <ImageGallery
-          images={this.state.images}
-          onImageClick={this.onImageClick}
-        />
+        {this.state.isEmpty ? (
+          <Attention>Нема чого дивитись</Attention>
+        ) : (
+          <ImageGallery
+            images={this.state.images}
+            onImageClick={this.onImageClick}
+          />
+        )}
         {this.state.showBtn && <Button onLoadMoreClick={this.handleClick} />}
         {this.state.largeImageURL && (
           <Modal
