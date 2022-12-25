@@ -4,7 +4,7 @@ export const Modal = ({ largeImageURL, largeImageOpen, alt }) => {
   return (
     <ModalBackdrop>
       <ModalWindow>
-        <img onClick={largeImageOpen} src={largeImageURL} alt={alt} />
+        <img src={largeImageURL} alt={alt} />
       </ModalWindow>
     </ModalBackdrop>
   );
