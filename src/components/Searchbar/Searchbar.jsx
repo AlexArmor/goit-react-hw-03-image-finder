@@ -25,10 +25,10 @@ export class Searchbar extends Component {
   render() {
     return (
       <SearchSection>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit">
-            <span>Search</span>
-          </button>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormBtn type="submit">
+            <SearchFormLabel>Search</SearchFormLabel>
+          </SearchFormBtn>
           <SearchFormInput
             onChange={this.inputChange}
             type="text"
@@ -36,7 +36,7 @@ export class Searchbar extends Component {
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
+        </SearchForm>
       </SearchSection>
     );
   }
