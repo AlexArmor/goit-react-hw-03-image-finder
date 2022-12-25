@@ -50,6 +50,7 @@ export class App extends Component {
       page: 1,
       isLoading: false,
       showBtn: false,
+      showModal: false,
     });
   };
 
@@ -59,7 +60,7 @@ export class App extends Component {
     }));
   };
 
-  handleImageClick = largeImageURL => {
+  onImageClick = largeImageURL => {
     this.setState({
       largeImageURL,
     });
@@ -70,13 +71,18 @@ export class App extends Component {
       <>
         <Searchbar onFormSubmit={this.onFormSubmit} btnText="Search" />
         {this.state.isLoading && <Loader />}
-        <ImageGallery images={this.state.images} />
-        {this.state.showBtn && <Button onLoadMoreClick={this.handleClick} />}
-        <Modal
-          largeImageURL={this.state.largeImageURL}
-          onImageClick={this.handleImageClick}
-          alt={this.state.images.tags}
+        <ImageGallery
+          images={this.state.images}
+          onImageClick={this.onImageClick}
         />
+        {this.state.showBtn && <Button onLoadMoreClick={this.handleClick} />}
+        {this.state.largeImageURL && (
+          <Modal
+            onImageClick={this.onImageClick}
+            largeImageURL={this.state.largeImageURL}
+            alt={this.state.images.tags}
+          />
+        )}
       </>
     );
   }

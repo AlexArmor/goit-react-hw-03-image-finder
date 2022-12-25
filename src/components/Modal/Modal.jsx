@@ -1,9 +1,11 @@
-export const Modal = ({ largeImageURL, onImageClick, alt }) => {
+import { ModalBackdrop, ModalWindow } from './Modal.styled';
+
+export const Modal = ({ largeImageURL, largeImageOpen, alt }) => {
   return (
-    <div>
-      <div>
-        <img src="largeImageURL" alt="alt" />
-      </div>
-    </div>
+    <ModalBackdrop>
+      <ModalWindow>
+        <img onClick={largeImageOpen} src={largeImageURL} alt={alt} />
+      </ModalWindow>
+    </ModalBackdrop>
   );
 };

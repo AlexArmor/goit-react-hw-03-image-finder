@@ -1,7 +1,7 @@
 import { ImageGalleryItem } from '../ImageGalleryItem';
 import { ImageList } from './ImageGallery.styled';
 
-export const ImageGallery = ({ images }) => {
+export const ImageGallery = ({ images, onImageClick }) => {
   return (
     <ImageList>
       {images.map(({ id, webformatURL, largeImageURL, tags }) => {
@@ -10,6 +10,7 @@ export const ImageGallery = ({ images }) => {
             key={id}
             previewURL={webformatURL}
             largeImageURL={largeImageURL}
+            onImageClick={onImageClick}
             alt={tags}
           />
         );
