@@ -19,14 +19,6 @@ export class App extends Component {
     error: null,
   };
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
   componentDidUpdate(_, prevState) {
     if (
       prevState.query !== this.state.query ||
@@ -84,14 +76,6 @@ export class App extends Component {
     this.setState({
       largeImageURL,
     });
-  };
-
-  handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      this.setState({
-        largeImageURL: '',
-      });
-    }
   };
 
   render() {
